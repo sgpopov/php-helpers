@@ -24,6 +24,40 @@ class Str
     }
 
     /**
+     * Check if a given string starts with a given substring.
+     *
+     * @param string $haystack
+     * @param string $needle
+     *
+     * @return bool
+     */
+    public static function startsWith(string $haystack, string $needle) : bool
+    {
+        if ($needle === '') {
+            return true;
+        }
+
+        return mb_substr($haystack, 0, mb_strlen($needle)) === $needle;
+    }
+
+    /**
+     * Check if a given string ends with a given substring.
+     *
+     * @param string $haystack
+     * @param string $needle
+     *
+     * @return bool
+     */
+    public static function endsWith(string $haystack, string $needle) : bool
+    {
+        if ($needle === '') {
+            return true;
+        }
+
+        return mb_substr($haystack, -mb_strlen($needle)) === $needle;
+    }
+
+    /**
      * Return string length.
      *
      * @param string $input

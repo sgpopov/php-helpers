@@ -30,6 +30,114 @@ class StrTest extends PHPUnit_Framework_TestCase
     /**
      * @test
      *
+     * @covers Str::startsWith()
+     */
+    public function shouldCheckIfStringStartsWithSubstring()
+    {
+        $tests = [
+            [
+                'input' => 'This is a test',
+                'startsWith' => '',
+                'result' => true
+            ],
+            [
+                'input' => 'tHiS        iS eASY',
+                'startsWith' => 'this',
+                'result' => false
+            ],
+            [
+                'input' => '<img src="image.png" />',
+                'startsWith' => 'img',
+                'result' => false
+            ],
+            [
+                'input' => '<img src="image.png" />',
+                'startsWith' => '<img',
+                'result' => true
+            ],
+            [
+                'input' => 'ä ö ü ß €',
+                'startsWith' => 'a',
+                'result' => false
+            ],
+            [
+                'input' => 'ä ö ü ß €',
+                'startsWith' => 'ä',
+                'result' => true
+            ],
+            [
+                'input' => '!@~$%#^&()_+}{.;[]}"\'',
+                'startsWith' => '!@~',
+                'result' => true
+            ]
+        ];
+
+        foreach ($tests as $test) {
+            if ($test['result'] === true) {
+                $this->assertTrue(Str::startsWith($test['input'], $test['startsWith']));
+            } else {
+                $this->assertFalse(Str::startsWith($test['input'], $test['startsWith']));
+            }
+        }
+    }
+
+    /**
+     * @test
+     *
+     * @covers Str::endsWith()
+     */
+    public function shouldCheckIfStringEndsWithSubstring()
+    {
+        $tests = [
+            [
+                'input' => 'This is a test',
+                'endsWith' => '',
+                'result' => true
+            ],
+            [
+                'input' => 'tHiS        iS eASY',
+                'endsWith' => 'easy',
+                'result' => false
+            ],
+            [
+                'input' => '<img src="image.png" />',
+                'endsWith' => '.png',
+                'result' => false
+            ],
+            [
+                'input' => '<img src="image.png" />',
+                'endsWith' => '" />',
+                'result' => true
+            ],
+            [
+                'input' => 'ä ö ü',
+                'endsWith' => 'u',
+                'result' => false
+            ],
+            [
+                'input' => 'ä ö ü',
+                'endsWith' => 'ü',
+                'result' => true
+            ],
+            [
+                'input' => '!@~$%#^&()_+}{.;[]}"\'',
+                'endsWith' => '"\'',
+                'result' => true
+            ]
+        ];
+
+        foreach ($tests as $test) {
+            if ($test['result'] === true) {
+                $this->assertTrue(Str::endsWith($test['input'], $test['endsWith']));
+            } else {
+                $this->assertFalse(Str::endsWith($test['input'], $test['endsWith']));
+            }
+        }
+    }
+
+    /**
+     * @test
+     *
      * @covers Str::length()
      */
     public function shouldReturnStringLength()
