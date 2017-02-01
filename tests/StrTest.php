@@ -30,6 +30,28 @@ class StrTest extends PHPUnit_Framework_TestCase
     /**
      * @test
      *
+     * @covers Str::length()
+     */
+    public function shouldReturnStringLength()
+    {
+        $tests = [
+            'this is easy' => 12,
+            'tHiS        iS eASY' => 19,
+            '<img src="image.png" />' => 23,
+            'ä ö ü ß €' => 9,
+            'TeRríbLé(!) STRinG' => 18,
+            '!@~$%#^&()_+}{.;[]}"\'' => 21,
+            '$ ₡ ₱ £ ¢ £ ₨' => 13
+        ];
+
+        foreach ($tests as $input => $expectedLength) {
+            $this->assertSame($expectedLength, Str::length($input));
+        }
+    }
+
+    /**
+     * @test
+     *
      * @covers Str::slug()
      */
     public function shouldCreateUrlSlug()

@@ -24,6 +24,18 @@ class Str
     }
 
     /**
+     * Return string length.
+     *
+     * @param string $input
+     *
+     * @return int
+     */
+    public static function length(string $input) : int
+    {
+        return mb_strlen($input);
+    }
+
+    /**
      * Returns URL friendly slug version of input string:
      *  - converts all alpha chars to lowercase
      *  - converts any char that is not digit, letter or - into - symbols into "-"
